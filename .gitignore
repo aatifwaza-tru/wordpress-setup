@@ -1,0 +1,30 @@
+# WordPress core
+wp-admin/
+wp-includes/
+
+# WordPress uploads
+wp-content/uploads/
+
+# WordPress config
+wp-config.php
+
+# WordPress debug log
+debug.log
+
+# Node modules
+node_modules/
+
+# Composer
+vendor/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local

@@ -1,0 +1,32 @@
+name: Branch Merge Order Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - stg
+      - qa
+
+jobs:
+  check-branch-order:
+    name: Enforce Merge Order
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check merge order
+        run: |
+          BASE="${{ github.base_ref }}"
+          HEAD="${{ github.head_ref }}"
+
+          echo "Base: $BASE | Head: $HEAD"
+
+          if [[ "$BASE" == "main" && "$HEAD" != "stg" ]]; then
+            echo "ERROR: Only stg can merge into main."
+            exit 1
+          fi
+
+          if [[ "$BASE" == "stg" && "$HEAD" != "qa" && "$HEAD" != "dev" ]]; then
+            echo "ERROR: Only qa or dev can merge into stg."
+            exit 1
+          fi
+
+          echo "Branch merge order check passed."
